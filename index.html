@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mai Wakayama | Portfolio</title>
+<style>
+  /* Google Fonts Noto Sans埋め込み */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+  body {
+    margin: 0;
+    padding-top: 70px; /* ヘッダーの高さ分だけ上に余白を確保 */
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #fff;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #000;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+
+  nav a {
+    color: #fff;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  nav a:nth-of-type(2)  {
+    margin-right: 4rem;
+  }
+
+
+  nav a:hover {
+    color: #40E0D0; /* 差し色ターコイズ */
+  }
+
+    /* 自己紹介モーダル */
+    .modal-about {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+
+
+    .modal-about-modal {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      animation: fadeIn 0.3s ease;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .modal-about-modal h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+    }
+
+    .modal-about-modal p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+
+
+
+  .intro {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+  }
+  .intro h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .intro p {
+    color: #555;
+  }
+  .portfolio {
+    background-color: #f7f7f7;
+    padding: 2rem;
+  }
+  .portfolio h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    padding: 10px; 
+    background-color: #fff;
+    border: 1px solid #ddd;
+    /*border-radius: 8px;*/
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  .card:hover:hover img {
+  transform: scale(1.05) translateY(-5px); /* 少し拡大＋上に浮く */
+  box-shadow: 0 12px 20px rgba(0,0,0,0.2); /* 浮いたときの影 */
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .card-body {
+    padding: 1rem;
+  }
+  .card-body h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    color: #000;
+  }
+  .card-body p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+  }
+  .card img {
+    transition: transform 0.3s ease;
+  }
+  .card:hover img {
+    transform: scale(1.05);
+  }
+
+  /* 作品モーダル */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .modal img {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0 0 30px #fff;
+  }
+  .modal:target {
+    display: flex;
+  }
+  .modal .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+  }
+
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+
+    background:
+    
+
+    /* ほんのり白（左下の明るさ） */
+    radial-gradient(circle at 10% 95%, #fefefe 0%, rgba(254,254,254,0) 25%),
+    /* ピンクのにじみ（左上） */
+    radial-gradient(circle at 12% 12%, #f9d0e2 0%, rgba(249,208,226,0.0) 30%),
+    /* 濃いブルーの滲み（左中寄り） */
+    radial-gradient(circle at 20% 55%, #8192c8 0%, rgba(129,146,200,0) 35%),
+    /* 淡いパープル／ブルーのベース（上〜中央） */
+    radial-gradient(circle at 45% 12%, #bbb4d6 0%, rgba(187,180,214,0) 40%),
+    /* ミントグリーン（右下） */
+    radial-gradient(circle at 85% 85%, #acd8b5 0%, rgba(172,216,181,0) 38%),
+    /* 全体のトーンをつなぐ薄い斜めグラデ（やわらかくする） */
+    linear-gradient(135deg, rgba(185,194,225,0.12), rgba(153,172,202,0.10));
+
+  }
+
+  footer a {
+    color: #40E0D0;
+    text-decoration: none;
+    margin: 0 0.5rem;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mai Wakayama</h1>
+  <nav>
+    <a href="#" id="aboutLink">About Me</a>
+    <a href="mailto:maimaimaco@gmail.com">Contact</a>
+  </nav>
+</header>
+
+
+<!-- モーダル -->
+<div class="modal-about" id="modalOverlay">
+  <div class="modal-about-modal">
+    <button class="close-btn" id="closeModal">&times;</button>
+    <h2>About Me</h2>
+    
+    <p>若山　まい　〈神奈川県出身・東京都在住〉</p>
+    <p>これまで約20年間、紙媒体DTPから始まりウェブ、放送関連のグラフィックデザインに従事して参りました。<br>
+    視覚表現を通じて「伝わる」「使いやすい」ＵＩデザインを大切にしています。</p>
+    <p>使用アプリケーション/スキル：Adobe Photoshop・illustrator、HTML / CSS</p>
+  </div>
+</div>
+
+
+<section id="portfolio" class="portfolio">
+  <h2>Artworks</h2>
+  <div class="portfolio-grid">
+
+
+
+
+
+  <a href="#img001" class="card">
+   <img src="./001.jpg" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>自治体データ放送トップ画面</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img001" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./001.jpg" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+
+  <a href="#img004" class="card">
+   <img src="./004.jpg" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>CATVデータ放送画面</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img004" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./004.jpg" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+
+    <a href="#img002" class="card">
+   <img src="./002.jpg" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>医療機関データ放送画面（提案資料）</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img002" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./002.jpg" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+    <a href="#img003" class="card">
+   <img src="./003.jpg" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>テレビ番組内スライド</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img003" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./003.jpg" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+
+  <a href="#img005" class="card">
+   <img src="./005.jpg" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>情報告知端末メニュー画面A</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img005" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./005.jpg" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+
+  <a href="#img006" class="card">
+   <img src="./006.jpg" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>情報告知端末メニュー画面B</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img006" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./006.jpg" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+    <a href="#img013" class="card">
+   <img src="./013.jpg" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>自治体向けアプリ告知フライヤー</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img013" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./013.jpg" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+
+      <a href="#img011" class="card">
+   <img src="./011.jpg" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>CATV向けキャンペーン告知フライヤー</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img011" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./011.jpg" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+      <a href="#img012" class="card">
+   <img src="./012.jpg" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>イベントポスター</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img012" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./012.jpg" alt="作品タイトル1 拡大表示">
+  </div>
+
+  </div>
+</section>
+
+<footer id="">
+  <p>&copy; 2025 takenokotaro</p>
+</footer>
+
+<script>
+  const aboutLink = document.getElementById('aboutLink');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const closeModal = document.getElementById('closeModal');
+
+  aboutLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    modalOverlay.style.display = 'flex';
+  });
+
+  closeModal.addEventListener('click', () => {
+    modalOverlay.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.style.display = 'none';
+    }
+  });
+</script>
+
+
+</body>
+</html>
