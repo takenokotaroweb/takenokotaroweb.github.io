@@ -150,7 +150,7 @@
 
   .card:hover:hover img {
   transform: scale(1.05) translateY(-5px); /* 少し拡大＋上に浮く */
-  box-shadow: 0 12px 20px rgba(0,0,0,0.2); /* 浮いたときの影 */
+  /*box-shadow: 0 12px 20px rgba(0,0,0,0.2);*/ /* 浮いたときの影 */
   }
 
   .card:hover {
@@ -185,7 +185,7 @@
   }
   .card:hover {
     transform: scale(1.03);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    /*box-shadow: 0 12px 24px rgba(0,0,0,0.2);*/
   }
   .card img {
     transition: transform 0.3s ease;
@@ -208,8 +208,12 @@
   .modal img {
     max-width: 90%;
     max-height: 90%;
-    box-shadow: 0 0 30px #fff;
+    /*box-shadow: 0 0 30px #fff;*/
   }
+
+
+
+
   .modal:target {
     display: flex;
   }
@@ -282,7 +286,8 @@
     
     <p>若山　まい　〈神奈川県出身・東京都在住〉</p>
     <p>これまで約20年間、紙媒体DTPから始まりウェブ、放送関連のグラフィックデザインに従事して参りました。<br>
-    視覚表現を通じて「伝わる」「使いやすい」ＵＩデザインを大切にしています。</p>
+    視覚表現を通じて「伝わる」「使いやすい」ＵＩデザインを大切にしています。<br>
+    今後は、これまでに培った経験と知識を活かし、活動の幅をさらに広げていきたいと考えています。</p>
     <p>使用アプリケーション/スキル：Adobe Photoshop・illustrator、HTML / CSS</p>
   </div>
 </div>
@@ -434,6 +439,54 @@
     <a href="#" class="close">×</a>
     <img src="./012.jpg" alt="作品タイトル1 拡大表示">
   </div>
+
+
+        <a href="#img009" class="card">
+   <img src="./009.png" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>イベントポスター</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img009" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./009.png" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+
+        <a href="#img010" class="card">
+   <img src="./010.png" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>イベントポスター</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img010" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./010.png" alt="作品タイトル1 拡大表示">
+  </div>
+
+
+
+        <a href="#img014" class="card">
+   <img src="./014.png" alt="作品タイトル1">
+    <div class="card-body">
+      <h3>イベントポスター</h3>
+      <p>作品の簡単な説明文が入ります。</p>
+    </div>
+  </a>
+
+  <!-- モーダル表示 -->
+  <div id="img014" class="modal">
+    <a href="#" class="close">×</a>
+    <img src="./014.png" alt="作品タイトル1 拡大表示">
+  </div>
+
 
   </div>
 </section>
