@@ -66,8 +66,6 @@
       z-index: 1000;
     }
 
-
-
     .modal-about-modal {
       background: #fff;
       padding: 2rem;
@@ -106,7 +104,14 @@
       line-height: 1.6;
     }
 
-
+    .modal-about .modal-about-modal .modal-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+      margin: -70px 0 -50px 400px;
+    }
 
 
   .intro {
@@ -278,12 +283,12 @@
 </header>
 
 
-<!-- モーダル -->
+<!-- 自己紹介モーダル -->
 <div class="modal-about" id="modalOverlay">
   <div class="modal-about-modal">
     <button class="close-btn" id="closeModal">&times;</button>
     <h2>About Me</h2>
-    
+    <img src="myface.png" alt="プロフィール画像" class="modal-image">
     <p>若山　まい　〈神奈川県出身・東京都在住〉</p>
     <p>これまで約20年間、紙媒体DTPから始まりウェブ、放送関連のグラフィックデザインに従事して参りました。<br>
     視覚表現を通じて「伝わる」「使いやすい」ＵＩデザインを大切にしています。<br>
